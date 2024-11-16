@@ -1,11 +1,65 @@
-// extended hmtl element
-class ExtendedButton extends HTMLButtonElement {
+// simple example
+class SimpleExamle extends HTMLElement {
     constructor() {
-      super();
-      this.addEventListener('click', () => alert("Extended!"));
+        super();
+        this.innerHTML = "simple example"
     }
 }
-customElements.define('extended-button', ExtendedButton, {extends: 'button'});
+customElements.define("simple-example", SimpleExamle);
+
+// example with inner text and attribute
+class AttributeInnerText extends HTMLElement {
+    constructor() {
+        super();
+        let item = this.getAttribute('item')
+        this.innerHTML = `<h3>${this.innerText} - ${item}</h3>`
+    }
+}
+customElements.define("attribute-inner-text", AttributeInnerText);
+
+// example with shadow root
+class ShadowRoot extends HTMLElement {
+    constructor() {
+        super();
+        // mode: "open" -> available as shadowRoot, visible in browser dev tools
+        this.attachShadow({ mode: "open" })
+        // mode: "closed" -> null as shadowRoot, not visible in browser dev tools
+        // this.attachShadow({ mode: "closed" })
+	    this.shadowRoot.innerHTML = `<h3>shadow root</h3>`;
+    }
+}
+customElements.define("shadow-root", ShadowRoot);
+
+// slots
+const slotsTemplate = document.createElement("template")
+slotsTemplate.innerHTML = `
+    <style>
+        label { 
+            color: red;
+            display: block;
+        }
+        .description {
+            font-size: .65rem;
+            font-weight: lighter;
+            colot: #777;
+        }
+    </style>
+    <h3 data-title>
+        <slot></slot>
+        <span class="description">
+            <slot name="description"></slot>
+        </span>
+    </h3>
+    `
+
+class Slots extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" })
+        shadow.append(slotsTemplate.content.cloneNode(true))
+    }
+}
+customElements.define("slots-example", Slots);
 
 // lifecycle methods
 const template = document.createElement("template")
@@ -55,70 +109,14 @@ setInterval(() => {
 }, 500)
 // item.remove() // disconnectedCallback
 
-
-// slots
-const slotsTemplate = document.createElement("template")
-slotsTemplate.innerHTML = `
-    <style>
-        label { 
-            color: red;
-            display: block;
-        }
-        .description {
-            font-size: .65rem;
-            font-weight: lighter;
-            colot: #777;
-        }
-    </style>
-    <h3 data-title>
-        <slot></slot>
-        <span class="description">
-            <slot name="description"></slot>
-        </span>
-    </h3>
-    `
-
-class Slots extends HTMLElement {
+// extended hmtl element
+class ExtendedButton extends HTMLButtonElement {
     constructor() {
-        super();
-        const shadow = this.attachShadow({ mode: "open" })
-        shadow.append(slotsTemplate.content.cloneNode(true))
+      super();
+      this.addEventListener('click', () => alert("Extended!"));
     }
 }
-customElements.define("slots-example", Slots);
-
-// simple example
-class SimpleExamle extends HTMLElement {
-    constructor() {
-        super();
-        this.innerHTML = "simple example"
-    }
-}
-customElements.define("simple-example", SimpleExamle);
-
-// // example with inner text and attribute
-class AttributeInnerText extends HTMLElement {
-    constructor() {
-        super();
-        let item = this.getAttribute('item')
-        this.innerHTML = `<h3>${this.innerText} - ${item}</h3>`
-    }
-}
-customElements.define("attribute-inner-text", AttributeInnerText);
-
-
-// example with shadow root
-class ShadowRoot extends HTMLElement {
-    constructor() {
-        super();
-        // mode: "open" -> available as shadowRoot, visible in browser dev tools
-        this.attachShadow({ mode: "open" })
-        // mode: "closed" -> null as shadowRoot, not visible in browser dev tools
-        // this.attachShadow({ mode: "closed" })
-	    this.shadowRoot.innerHTML = `<h3>shadow root</h3>`;
-    }
-}
-customElements.define("shadow-root", ShadowRoot);
+customElements.define('extended-button', ExtendedButton, {extends: 'button'});
 
 
 // STYLES EXAMPLE
