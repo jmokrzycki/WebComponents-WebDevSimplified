@@ -2,6 +2,7 @@
 <html>
 <head>
     <script defer src="TodoItem.js"></script>
+    <script defer src="ExpandableList.js"></script>
     <style>
         h3 {
             color: red;
@@ -21,8 +22,8 @@
         <span slot="description">slot 2</span>
         <span slot="description">slot 3</span>
     </slots-example>
-
     <lifecycle-methods checked>lifecycle methods</lifecycle-methods>
+    <button is="extended-button">extended</button>
 
     <!-- style test -->
     <h3>style test</h3>
@@ -30,5 +31,17 @@
     
     <!-- <style-no-shadow></style-no-shadow>  -->
     <!-- <style-shadow></style-shadow> -->
+
+
+
+    <!-- extend html element -->
+    <ul is="expandable-list" data-expanded>
+        <li>First</li>
+        <li>Second</li>
+        <ul is="expandable-list" data-expanded>
+            <li>First</li>
+            <li>Second</li>
+        </ul>
+    </ul>
 </body>
 </html>

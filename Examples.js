@@ -1,3 +1,12 @@
+// extended hmtl element
+class ExtendedButton extends HTMLButtonElement {
+    constructor() {
+      super();
+      this.addEventListener('click', () => alert("Extended!"));
+    }
+}
+customElements.define('extended-button', ExtendedButton, {extends: 'button'});
+
 // lifecycle methods
 const template = document.createElement("template")
 template.innerHTML = `
