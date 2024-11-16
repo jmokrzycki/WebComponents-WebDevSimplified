@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script defer src="TodoItem.js"></script>
+    <style>
+        h3 {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <simple-example></simple-example>
+    <attribute-inner-text item="item">inner text</attribute-inner-text>
+    <shadow-root></shadow-root>
+    <slots-example>
+        default slot
+        <span slot="description">slot 1</span>
+        <span slot="description">slot 2</span>
+        <span slot="description">slot 3</span>
+    </slots-example>
+
+    <lifecycle-methods checked>lifecycle methods</lifecycle-methods>
+
+    <!-- style test -->
+    <h3>style test</h3>
+    <style-test></style-test>
+    
+    <!-- <style-no-shadow></style-no-shadow>  -->
+    <!-- <style-shadow></style-shadow> -->
+</body>
+</html>
